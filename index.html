@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Human Development Index (HDI) Simulator & Calculator</title>
+    <!-- Google Fonts: Outfit for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <svg class="header-logo" viewBox="0 0 24 24" width="32" height="32">
+                <path fill="currentColor" d="M12,2A10,10,0,0,0,2,12A10,10,0,0,0,12,22A10,10,0,0,0,22,12A10,10,0,0,0,12,2M12,4A2,2,0,0,1,14,6A2,2,0,0,1,12,8A2,2,0,0,1,10,6A2,2,0,0,1,12,4M12,18c-2.67,0-8,1.34-8,4v1h16v-1C20,19.34,14.67,18,12,18M8.5,12.5A3.5,3.5,0,0,1,12,9A3.5,3.5,0,0,1,15.5,12.5C15.5,14 13.5,16.5 12,17.5C10.5,16.5 8.5,14 8.5,12.5Z"/>
+            </svg>
+            <div class="title-meta">
+                <h1>HDI Simulator & Policy Planner</h1>
+                <p>Interactive human development index calculator & policy pathway modeler</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button id="theme-toggle" class="btn-icon" aria-label="Toggle Theme">
+                <!-- Moon Icon -->
+                <svg id="theme-icon-dark" class="icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M12.1,22c-5,0-9.1-4.1-9.1-9.1c0-3.1,1.5-6,4.1-7.7c0.4-0.3,0.9-0.1,1.1,0.3c0.2,0.4,0.1,0.9-0.3,1.1c-2,1.3-3.1,3.5-3.1,5.9c0,3.9,3.2,7.1,7.1,7.1c2.4,0,4.6-1.2,5.9-3.1c0.3-0.4,0.8-0.5,1.1-0.3c0.4,0.2,0.5,0.7,0.3,1.1C18.1,20.5,15.2,22,12.1,22z"/>
+                </svg>
+                <!-- Sun Icon -->
+                <svg id="theme-icon-light" class="icon hidden" viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M12,7c-2.8,0-5,2.2-5,5s2.2,5,5,5s5-2.2,5-5S14.8,7,12,7z M12,15c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S13.7,15,12,15z M11,1v3h2V1H11z M11,20v3h2v-3H11z M23,11h-3v2h3V11z M4,11H1v2h3V11z M19.8,18.4l-2.1-2.1l-1.4,1.4l2.1,2.1L19.8,18.4z M5.6,4.2L3.5,6.3l1.4,1.4l2.1-2.1L5.6,4.2z M17.7,5.6l2.1-2.1l-1.4-1.4l-2.1,2.1L17.7,5.6z M6.3,17.7l-2.1,2.1l1.4,1.4l2.1-2.1L6.3,17.7z"/>
+                </svg>
+            </button>
+            <button id="export-link" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                Share
+            </button>
+            <button id="export-report" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                Report
+            </button>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        <!-- LEFT PANEL: Simulators & Sliders -->
+        <section class="panel-section control-panel">
+            <div class="card card-presets">
+                <h2>Quick Presets & Countries</h2>
+                <p class="subtitle">Load scenarios to simulate development paths.</p>
+                <div class="preset-groups">
+                    <div class="preset-subgroup">
+                        <label>HDI Tiers</label>
+                        <div class="preset-buttons">
+                            <button class="btn btn-preset" data-preset="very-high">Very High</button>
+                            <button class="btn btn-preset" data-preset="medium">Medium</button>
+                            <button class="btn btn-preset" data-preset="low">Low</button>
+                        </div>
+                    </div>
+                    <div class="preset-subgroup">
+                        <label>Real Countries</label>
+                        <div class="select-wrapper">
+                            <select id="country-presets" class="form-control">
+                                <option value="">-- Choose Country --</option>
+                                <option value="norway">Norway (Very High)</option>
+                                <option value="japan">Japan (Very High)</option>
+                                <option value="brazil">Brazil (High)</option>
+                                <option value="india">India (Medium)</option>
+                                <option value="kenya">Kenya (Medium)</option>
+                                <option value="niger">Niger (Low)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-inputs">
+                <div class="card-header-toggle">
+                    <h2>Simulation Metrics</h2>
+                    <div class="toggle-container">
+                        <label class="toggle-label" for="ihdi-toggle">Inequality Discount (IHDI)</label>
+                        <input type="checkbox" id="ihdi-toggle" class="toggle-checkbox">
+                    </div>
+                </div>
+                
+                <!-- Dimension: Health -->
+                <div class="metric-group health-theme">
+                    <div class="metric-header">
+                        <div class="metric-title-block">
+                            <span class="indicator-dot"></span>
+                            <h3>Life Expectancy at Birth</h3>
+                        </div>
+                        <div class="value-container">
+                            <input type="number" id="life-exp-input" min="20" max="85" step="0.1" value="72.0" class="num-input">
+                            <span class="unit">yrs</span>
+                        </div>
+                    </div>
+                    <p class="slider-desc">Min: 20 yrs, Max: 85 yrs. Global average represents standard lifespan boundaries.</p>
+                    <div class="slider-wrapper">
+                        <input type="range" id="life-exp-slider" min="20" max="85" step="0.1" value="72" class="range-slider">
+                        <div class="slider-bounds">
+                            <span>20 yrs</span>
+                            <span>85 yrs</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Inequality Discount health -->
+                    <div class="inequality-slider-container hidden">
+                        <div class="ineq-header">
+                            <label>Health Inequality Discount</label>
+                            <span id="ineq-health-val">0%</span>
+                        </div>
+                        <input type="range" id="ineq-health-slider" min="0" max="50" step="1" value="0" class="ineq-slider">
+                    </div>
+                </div>
+
+                <!-- Dimension: Education (MYS & EYS) -->
+                <div class="metric-group education-theme">
+                    <div class="metric-header">
+                        <div class="metric-title-block">
+                            <span class="indicator-dot"></span>
+                            <h3>Mean Years of Schooling</h3>
+                        </div>
+                        <div class="value-container">
+                            <input type="number" id="mean-school-input" min="0" max="15" step="0.1" value="8.5" class="num-input">
+                            <span class="unit">yrs</span>
+                        </div>
+                    </div>
+                    <p class="slider-desc">Average schooling duration for adults aged 25+.</p>
+                    <div class="slider-wrapper">
+                        <input type="range" id="mean-school-slider" min="0" max="15" step="0.1" value="8.5" class="range-slider">
+                        <div class="slider-bounds">
+                            <span>0 yrs</span>
+                            <span>15 yrs</span>
+                        </div>
+                    </div>
+
+                    <!-- Expected Years of Schooling -->
+                    <div class="metric-header sub-metric-header">
+                        <div class="metric-title-block">
+                            <span class="indicator-dot"></span>
+                            <h3>Expected Years of Schooling</h3>
+                        </div>
+                        <div class="value-container">
+                            <input type="number" id="expected-school-input" min="0" max="18" step="0.1" value="12.0" class="num-input">
+                            <span class="unit">yrs</span>
+                        </div>
+                    </div>
+                    <p class="slider-desc">Expected schooling duration for entering children.</p>
+                    <div class="slider-wrapper">
+                        <input type="range" id="expected-school-slider" min="0" max="18" step="0.1" value="12" class="range-slider">
+                        <div class="slider-bounds">
+                            <span>0 yrs</span>
+                            <span>18 yrs</span>
+                        </div>
+                    </div>
+
+                    <!-- Inequality Discount education -->
+                    <div class="inequality-slider-container hidden">
+                        <div class="ineq-header">
+                            <label>Education Inequality Discount</label>
+                            <span id="ineq-education-val">0%</span>
+                        </div>
+                        <input type="range" id="ineq-education-slider" min="0" max="50" step="1" value="0" class="ineq-slider">
+                    </div>
+                </div>
+
+                <!-- Dimension: Income -->
+                <div class="metric-group income-theme">
+                    <div class="metric-header">
+                        <div class="metric-title-block">
+                            <span class="indicator-dot"></span>
+                            <h3>GNI per Capita (PPP $)</h3>
+                        </div>
+                        <div class="value-container">
+                            <span class="unit">$</span>
+                            <input type="number" id="gni-input" min="100" max="75000" step="50" value="12000" class="num-input GNI-input">
+                        </div>
+                    </div>
+                    <p class="slider-desc">Gross National Income per capita (Logarithmic scale slider).</p>
+                    <div class="slider-wrapper">
+                        <input type="range" id="gni-slider" min="0" max="1000" step="1" value="500" class="range-slider">
+                        <div class="slider-bounds">
+                            <span>$100</span>
+                            <span>$75,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Inequality Discount GNI -->
+                    <div class="inequality-slider-container hidden">
+                        <div class="ineq-header">
+                            <label>Income Inequality Discount</label>
+                            <span id="ineq-income-val">0%</span>
+                        </div>
+                        <input type="range" id="ineq-income-slider" min="0" max="50" step="1" value="0" class="ineq-slider">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CENTER PANEL: Gauge and Primary Output Visualizations -->
+        <section class="panel-section display-panel">
+            <!-- Score Card containing gauge -->
+            <div class="card card-score-gauge">
+                <div class="gauge-display-container">
+                    <div class="gauge-svg-wrapper">
+                        <svg viewBox="0 0 200 120" class="gauge-svg">
+                            <!-- Background Track -->
+                            <path class="gauge-track" d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke-linecap="round" />
+                            <!-- Active Fill -->
+                            <path id="gauge-fill" class="gauge-fill" d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke-linecap="round" />
+                        </svg>
+                        <div class="gauge-info">
+                            <span id="hdi-label" class="hdi-badge-title">HDI Score</span>
+                            <span id="hdi-score-value">0.720</span>
+                            <span id="hdi-tier-name" class="tier-indicator tier-medium">Medium Development</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tier-ranges-visual">
+                    <div class="range-bar low-tier" data-tier="low" title="Low Development: < 0.550">
+                        <span class="range-text">Low</span>
+                        <span class="range-num">&lt;.55</span>
+                    </div>
+                    <div class="range-bar medium-tier" data-tier="medium" title="Medium Development: 0.550 - 0.699">
+                        <span class="range-text">Medium</span>
+                        <span class="range-num">.55-.70</span>
+                    </div>
+                    <div class="range-bar high-tier" data-tier="high" title="High Development: 0.700 - 0.799">
+                        <span class="range-text">High</span>
+                        <span class="range-num">.70-.80</span>
+                    </div>
+                    <div class="range-bar very-high-tier" data-tier="very-high" title="Very High Development: >= 0.800">
+                        <span class="range-text">Very High</span>
+                        <span class="range-num">&ge;.80</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dimension Breakdown Metrics & Gap Analyzer -->
+            <div class="card card-breakdown">
+                <h2>Index Breakdown & Bottleneck Finder</h2>
+                <p class="subtitle">Find which indicator pulls down or pushes up your score.</p>
+                
+                <div class="breakdown-layout">
+                    <!-- Progress Bar Lists -->
+                    <div class="sub-index-list">
+                        <!-- Health Index -->
+                        <div class="sub-index-item health-theme" id="health-index-card">
+                            <div class="sub-index-header">
+                                <div class="name-block">
+                                    <span class="sub-index-dot"></span>
+                                    <span>Health Index (LEI)</span>
+                                </div>
+                                <span class="sub-index-value" id="lei-value">0.800</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="lei-progress" style="width: 80%"></div>
+                            </div>
+                            <span class="sub-index-note" id="lei-note">Normalized from Life Expectancy</span>
+                        </div>
+
+                        <!-- Education Index -->
+                        <div class="sub-index-item education-theme" id="education-index-card">
+                            <div class="sub-index-header">
+                                <div class="name-block">
+                                    <span class="sub-index-dot"></span>
+                                    <span>Education Index (EI)</span>
+                                </div>
+                                <span class="sub-index-value" id="ei-value">0.720</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="ei-progress" style="width: 72%"></div>
+                            </div>
+                            <div class="sub-index-multi-notes">
+                                <span class="sub-index-note" id="mys-index-note">MYS Index: 0.567</span>
+                                <span class="sub-index-note" id="eys-index-note">EYS Index: 0.667</span>
+                            </div>
+                        </div>
+
+                        <!-- Income Index -->
+                        <div class="sub-index-item income-theme" id="income-index-card">
+                            <div class="sub-index-header">
+                                <div class="name-block">
+                                    <span class="sub-index-dot"></span>
+                                    <span>Income Index (II)</span>
+                                </div>
+                                <span class="sub-index-value" id="ii-value">0.650</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="ii-progress" style="width: 65%"></div>
+                            </div>
+                            <span class="sub-index-note" id="ii-note">Normalized based on GNI log-scale</span>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Radar/Visual Chart Area -->
+                    <div class="chart-wrapper">
+                        <div class="radar-container">
+                            <canvas id="dimension-radar-chart" width="200" height="200"></canvas>
+                        </div>
+                        <div class="bottleneck-banner" id="bottleneck-indicator">
+                            <svg class="warning-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            <span id="bottleneck-text">Education Index is limiting overall development.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: policy simulators and simulator diagnostics -->
+        <section class="panel-section policy-panel">
+            <!-- Policy Target Simulator (What-If Engine) -->
+            <div class="card card-policy-planner">
+                <h2>Policy Goal Pathway Planner</h2>
+                <p class="subtitle">Set an HDI target and find pathways to reach it.</p>
+                
+                <div class="target-control-group">
+                    <label for="hdi-target-slider">Set Target HDI:</label>
+                    <div class="target-val-wrapper">
+                        <input type="range" id="hdi-target-slider" min="0.300" max="0.990" step="0.005" value="0.800" class="range-slider target-slider">
+                        <span id="hdi-target-val">0.800</span>
+                    </div>
+                </div>
+
+                <div class="pathway-solutions-container">
+                    <div class="pathway-tabs">
+                        <button class="tab-btn active" data-path="balanced">Balanced</button>
+                        <button class="tab-btn" data-path="social">Social First</button>
+                        <button class="tab-btn" data-path="economic">Economic First</button>
+                    </div>
+
+                    <div class="pathway-content">
+                        <h4 id="pathway-title">Balanced Policy Option</h4>
+                        <p id="pathway-desc">Requires proportional development across all health, education, and economy sectors.</p>
+                        
+                        <div class="policy-targets-list" id="policy-targets-container">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational Resources Section -->
+            <div class="card card-educational">
+                <h2>HDI Methodology</h2>
+                <div class="edu-formula">
+                    $$\text{HDI} = \sqrt[3]{\text{Health} \times \text{Education} \times \text{Income}}$$
+                </div>
+                <p>The HDI is a geometric mean of three indices. Geometric mean shows that high income cannot compensate for low health or poor schooling.</p>
+                
+                <details class="edu-details">
+                    <summary>Health Dimension normalization</summary>
+                    <p>Formula: <code>(Life Expectancy - 20) / (85 - 20)</code>. Minimium value is set to 20 years, maximum to 85 years.</p>
+                </details>
+                
+                <details class="edu-details">
+                    <summary>Education Dimension normalization</summary>
+                    <p>Formula: <code>(MYS_Index + EYS_Index) / 2</code>. <code>MYS_Index = MYS / 15</code> and <code>EYS_Index = EYS / 18</code>.</p>
+                </details>
+
+                <details class="edu-details">
+                    <summary>Income Dimension normalization</summary>
+                    <p>Formula: <code>(ln(GNI) - ln(100)) / (ln(75000) - ln(100))</code>. Standardizes GNI per capita on a logarithmic scale.</p>
+                </details>
+
+                <details class="edu-details">
+                    <summary>Inequality-Adjusted HDI (IHDI)</summary>
+                    <p>Calculated as <code>I_Dimension = Dimension_Index * (1 - Inequality_Discount)</code>, and IHDI is the geometric mean of these inequality-adjusted indices.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <!-- Share Toast Notification -->
+    <div id="share-toast" class="toast hidden">
+        <span id="toast-message">Link copied to clipboard!</span>
+    </div>
+
+    <!-- MathJax for rendering equations cleanly -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -36,7 +36,7 @@ The simulator calculates metrics according to the standard UNDP formulas:
 $$Health\ Index\ (LEI) = \frac{\text{Life Expectancy} - 20}{85 - 20}$$
 
 $$Education\ Index\ (EI) = \frac{\text{MYSI} + \text{EYSI}}{2}$$
-*where $$\text{MYSI} = \frac{\text{Mean Schooling}}{15}$$ and $$\text{EYSI} = \frac{\text{Expected Schooling}}{18}$$.*
+*where $\text{MYSI} = \frac{\text{Mean Schooling}}{15}$ and $\text{EYSI} = \frac{\text{Expected Schooling}}{18}$.*
 
 $$Income\ Index\ (II) = \frac{\ln(\text{GNI per Capita}) - \ln(100)}{\ln(75,000) - \ln(100)}$$
 
